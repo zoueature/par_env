@@ -51,22 +51,15 @@ func parse(content string) map[string]string {
 	return env
 }
 
-func checkAndParse() {
-	if !hasParsed {
-		parse("")
-	}
-}
-
 func Get(key string, defaultValue string) string {
-	checkAndParse()
-	if env[key] == "" {
+	value, ok := env[key]
+	if !ok {
 		return defaultValue
 	}
-	return env[key]
+	return value
 }
 
 func Set(key string, value string) {
-	checkAndParse()
 	env[key] = value
 }
 
